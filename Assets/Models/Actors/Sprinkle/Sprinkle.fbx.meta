@@ -1,0 +1,283 @@
+fileFormatVersion: 2
+guid: 04b750a6a1f79224d8ed72f8ab587904
+timeCreated: 1509260915
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Arm1.L
+    100002: Arm1.R
+    100004: Arm2.L
+    100006: Arm2.R
+    100008: Arm3.L
+    100010: Arm3.L_end
+    100012: Arm3.R
+    100014: Arm3.R_end
+    100016: bow1.L
+    100018: bow1.L_end
+    100020: bow1.R
+    100022: bow1.R_end
+    100024: bow2.L
+    100026: bow2.L_end
+    100028: bow2.R
+    100030: bow2.R_end
+    100032: bow3.L
+    100034: bow3.R
+    100036: bow4.L
+    100038: bow4.L_end
+    100040: bow4.R
+    100042: bow4.R_end
+    100044: bowMain
+    100046: chest
+    100048: foot.L
+    100050: foot.R
+    100052: footRoll.L
+    100054: footRoll.R
+    100056: head
+    100058: LegControl.L
+    100060: LegControl.R
+    100062: LegIk.L
+    100064: LegIk.L_end
+    100066: LegIk.R
+    100068: LegIk.R_end
+    100070: legPoleTarget.L
+    100072: legPoleTarget.L_end
+    100074: legPoleTarget.R
+    100076: legPoleTarget.R_end
+    100078: Master
+    100080: neck
+    100082: Rig
+    100084: ROOT
+    100086: shin.L
+    100088: shin.L_end
+    100090: shin.R
+    100092: shin.R_end
+    100094: shoulder.L
+    100096: shoulder.R
+    100098: spine
+    100100: //RootNode
+    100102: Sprinkle
+    100104: tail01
+    100106: tail02
+    100108: tail03
+    100110: tail04
+    100112: tail05
+    100114: tail06
+    100116: tail07
+    100118: tail07_end
+    100120: thigh.L
+    100122: thigh.R
+    100124: toe.L
+    100126: toe.L_end
+    100128: toe.R
+    100130: toe.R_end
+    100132: toesControl.L
+    100134: toesControl.L_end
+    100136: toesControl.R
+    100138: toesControl.R_end
+    400000: Arm1.L
+    400002: Arm1.R
+    400004: Arm2.L
+    400006: Arm2.R
+    400008: Arm3.L
+    400010: Arm3.L_end
+    400012: Arm3.R
+    400014: Arm3.R_end
+    400016: bow1.L
+    400018: bow1.L_end
+    400020: bow1.R
+    400022: bow1.R_end
+    400024: bow2.L
+    400026: bow2.L_end
+    400028: bow2.R
+    400030: bow2.R_end
+    400032: bow3.L
+    400034: bow3.R
+    400036: bow4.L
+    400038: bow4.L_end
+    400040: bow4.R
+    400042: bow4.R_end
+    400044: bowMain
+    400046: chest
+    400048: foot.L
+    400050: foot.R
+    400052: footRoll.L
+    400054: footRoll.R
+    400056: head
+    400058: LegControl.L
+    400060: LegControl.R
+    400062: LegIk.L
+    400064: LegIk.L_end
+    400066: LegIk.R
+    400068: LegIk.R_end
+    400070: legPoleTarget.L
+    400072: legPoleTarget.L_end
+    400074: legPoleTarget.R
+    400076: legPoleTarget.R_end
+    400078: Master
+    400080: neck
+    400082: Rig
+    400084: ROOT
+    400086: shin.L
+    400088: shin.L_end
+    400090: shin.R
+    400092: shin.R_end
+    400094: shoulder.L
+    400096: shoulder.R
+    400098: spine
+    400100: Sprinkle
+    400102: //RootNode
+    400104: tail01
+    400106: tail02
+    400108: tail03
+    400110: tail04
+    400112: tail05
+    400114: tail06
+    400116: tail07
+    400118: tail07_end
+    400120: thigh.L
+    400122: thigh.R
+    400124: toe.L
+    400126: toe.L_end
+    400128: toe.R
+    400130: toe.R_end
+    400132: toesControl.L
+    400134: toesControl.L_end
+    400136: toesControl.R
+    400138: toesControl.R_end
+    4300000: Sprinkle
+    7400000: IdlePose
+    7400002: Walk
+    9500000: //RootNode
+    13700000: Sprinkle
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: IdlePose
+      takeName: Rig|IdlePose
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Rig|Walk
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

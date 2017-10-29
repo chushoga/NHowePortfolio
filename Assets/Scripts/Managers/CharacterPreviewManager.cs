@@ -17,7 +17,7 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 	void Start(){
 		// Instantiate the first model in the list as default and set as "model" game object
-		GameObject model = Instantiate(gm[0], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+		GameObject model = Instantiate(gm[1], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
 		// Set the models postion to this transform.
 		//---------------------------------------------------
