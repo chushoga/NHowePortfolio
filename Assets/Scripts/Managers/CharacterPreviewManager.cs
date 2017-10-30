@@ -14,30 +14,18 @@ public class CharacterPreviewManager : MonoBehaviour {
 	// UI
 	public GameObject actionButtonPrefab; // the action button prefab
 	public GameObject actorButtonPrefab; // the actor button prefab
+	public GameObject GUI3DButtonCamera; // camera for 3d preveiw button
 	private GameObject actionPanel; // content panel of the scroll view
 	private GameObject modelPanel; // modle panels with scroll view
 
 	void Start(){
-
-		// Instantiate buttons for the model selection buttons
+		
 		// Find the action panel
 		modelPanel = GameObject.Find("ModelPanelContent");
+
+		// Instantiate buttons for the model selection buttons
 		if (modelPanel != null) {
-			for (int i = 0; i < gm.Count; i++) {
-
-				// Instantiate the action button prefab.
-				GameObject a = (GameObject)Instantiate(actorButtonPrefab);
-
-				// Set the parent for the button
-				a.transform.SetParent(modelPanel.transform, false);
-
-				// Get and set the button text
-				Text txt = a.GetComponentInChildren<Text>();
-
-				// set the text to the model name and Remove the affex "Demo"
-				txt.text = gm[i].name.Replace ("Demo", "");
-
-			}
+			PopulateModels();
 		}
 
 		// Instantiate the first model in the list as default and set as "model" game object
@@ -120,6 +108,37 @@ public class CharacterPreviewManager : MonoBehaviour {
 	// Stop the model rotation
 	public void StopRotating(){
 		rotSpeed = 0;
+	}
+
+	// Populate Models Menu
+	public void PopulateModels(){
+		for (int i = 0; i < gm.Count; i++) {
+			
+			GameObject modelButtonPreviewPos = new GameObject();
+
+			float spawnOffset = -i + (-i + -5f);
+			Vector3 spawnPos = new Vector3(0f,spawnOffset,-3f);
+
+			modelButtonPreviewPos.transform.position = spawnPos;				
+			modelButtonPreviewPos.name = gm[i].name + "Anchor";
+
+			// Instantiate the action button prefab.
+			GameObject GUI3DBtn = (GameObject)Instantiate(GUI3DButtonCamera);
+			GUI3DBtn.transform.position = spawnPos;
+
+			// Instantiate the action button prefab.
+			GameObject a = (GameObject)Instantiate(actorButtonPrefab);
+
+			// Set the parent for the button
+			a.transform.SetParent(modelPanel.transform, false);
+
+			// Get and set the button text
+			Text txt = a.GetComponentInChildren<Text>();
+
+			// set the text to the model name and Remove the affex "Demo"
+			txt.text = gm[i].name.Replace ("Demo", "");
+
+		}
 	}
 
 }
