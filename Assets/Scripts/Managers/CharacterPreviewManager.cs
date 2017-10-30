@@ -13,9 +13,33 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 	// UI
 	public GameObject actionButtonPrefab; // the action button prefab
+	public GameObject actorButtonPrefab; // the actor button prefab
 	private GameObject actionPanel; // content panel of the scroll view
+	private GameObject modelPanel; // modle panels with scroll view
 
 	void Start(){
+
+		// Instantiate buttons for the model selection buttons
+		// Find the action panel
+		modelPanel = GameObject.Find("ModelPanelContent");
+		if (modelPanel != null) {
+			for (int i = 0; i < gm.Count; i++) {
+
+				// Instantiate the action button prefab.
+				GameObject a = (GameObject)Instantiate(actorButtonPrefab);
+
+				// Set the parent for the button
+				a.transform.SetParent(modelPanel.transform, false);
+
+				// Get and set the button text
+				Text txt = a.GetComponentInChildren<Text>();
+
+				// set the text to the model name and Remove the affex "Demo"
+				txt.text = gm[i].name.Replace ("Demo", "");
+
+			}
+		}
+
 		// Instantiate the first model in the list as default and set as "model" game object
 		GameObject model = Instantiate(gm[1], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
