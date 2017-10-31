@@ -29,7 +29,7 @@ public class CharacterPreviewManager : MonoBehaviour {
 		}
 
 		// Instantiate the first model in the list as default and set as "model" game object
-		GameObject model = Instantiate(gm[1], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+		GameObject model = Instantiate(gm[0], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
 		// Set the models postion to this transform.
 		//---------------------------------------------------
@@ -113,7 +113,15 @@ public class CharacterPreviewManager : MonoBehaviour {
 	// Populate Models Menu
 	public void PopulateModels(){
 		for (int i = 0; i < gm.Count; i++) {
-			
+
+			// --------------------------------------------------------------------------
+			// RENDER TEXTURE
+			// --------------------------------------------------------------------------
+			RenderTexture rt = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
+			rt.Create();
+			rt.name = "RenderTexture" + i;
+			// --------------------------------------------------------------------------
+
 			GameObject modelButtonPreviewPos = new GameObject();
 
 			float spawnOffset = -i + (-i + -5f);
@@ -122,9 +130,16 @@ public class CharacterPreviewManager : MonoBehaviour {
 			modelButtonPreviewPos.transform.position = spawnPos;				
 			modelButtonPreviewPos.name = gm[i].name + "Anchor";
 
-			// Instantiate the action button prefab.
-			GameObject GUI3DBtn = (GameObject)Instantiate(GUI3DButtonCamera);
+
+			GameObject GUI3DBtn = (GameObject)Instantiate(GUI3DButtonCamera);// Instantiate the action button prefab.
 			GUI3DBtn.transform.position = spawnPos;
+			Camera guiCam = GUI3DBtn.GetComponent<Camera>();
+
+			Debug.Log(rt.IsCreated());
+
+			guiCam.targetTexture = rt;
+
+			Debug.Log (guiCam.targetTexture.name);
 
 			// Instantiate the action button prefab.
 			GameObject a = (GameObject)Instantiate(actorButtonPrefab);
@@ -137,6 +152,10 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 			// set the text to the model name and Remove the affex "Demo"
 			txt.text = gm[i].name.Replace ("Demo", "");
+
+			// set the raw image to the render texture.
+			RawImage rawImg = a.GetComponentInChildren<RawImage>();
+			rawImg.texture = rt;
 
 		}
 	}
