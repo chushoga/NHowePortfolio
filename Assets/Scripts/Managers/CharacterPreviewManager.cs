@@ -122,17 +122,29 @@ public class CharacterPreviewManager : MonoBehaviour {
 			rt.name = "RenderTexture" + i;
 			// --------------------------------------------------------------------------
 
-			GameObject modelButtonPreviewPos = new GameObject();
+			// --------------------------------------------------------------------------
+			// SET SPAWN FOR MODEL PREVIEW MODELS/CAMERAS
+			// --------------------------------------------------------------------------
+			float spawnOffset = -i + (-i + -5f); // spawn offset down and extra spacing
+			Vector3 spawnPos = new Vector3(0f,spawnOffset,0f); // set the new postion
+			Vector3 cameraSpawnPos = new Vector3(0f,spawnOffset + 0.5f, -3f);
 
-			float spawnOffset = -i + (-i + -5f);
-			Vector3 spawnPos = new Vector3(0f,spawnOffset,-3f);
+			// --------------------------------------------------------------------------
+			// CREATE SPAWN POINT FOR MODELS TEXTURE
+			// --------------------------------------------------------------------------
+			GameObject spawnPoint = new GameObject(); // create new empty GameObject
+			spawnPoint.transform.position = spawnPos; // set its spawn position incremented
+			spawnPoint.transform.localRotation *= Quaternion.Euler(0,180,0); // flip the spawn 180
+			spawnPoint.name = gm[i].name + "Anchor"; // give the spawn point a new name
 
-			modelButtonPreviewPos.transform.position = spawnPos;				
-			modelButtonPreviewPos.name = gm[i].name + "Anchor";
-
+			// --------------------------------------------------------------------------
+			// INSTANTIATE PREVIEW MODELS
+			// --------------------------------------------------------------------------
+			GameObject go = (GameObject)Instantiate(gm[i]);
+			go.transform.SetParent(spawnPoint.transform, false);
 
 			GameObject GUI3DBtn = (GameObject)Instantiate(GUI3DButtonCamera);// Instantiate the action button prefab.
-			GUI3DBtn.transform.position = spawnPos;
+			GUI3DBtn.transform.position = cameraSpawnPos;
 			Camera guiCam = GUI3DBtn.GetComponent<Camera>();
 
 			Debug.Log(rt.IsCreated());
