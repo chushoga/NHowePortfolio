@@ -568,11 +568,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1077191917288270, guid: e7d73ed4d2d547e428b1253eed4e6d2c, type: 2}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 8220585740371884164, guid: 0000000000000000d000000000000000,
-        type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7d73ed4d2d547e428b1253eed4e6d2c, type: 2}
   m_IsPrefabParent: 0
@@ -678,7 +673,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 424850129}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
@@ -5061,7 +5056,7 @@ Prefab:
     - target: {fileID: 224506664020117928, guid: 1bee395d33952a947a08eba384ab91df,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 168.59314
+      value: 168.5719
       objectReference: {fileID: 0}
     - target: {fileID: 224506664020117928, guid: 1bee395d33952a947a08eba384ab91df,
         type: 2}
@@ -5635,7 +5630,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1101259563}
   m_HandleRect: {fileID: 1101259562}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
