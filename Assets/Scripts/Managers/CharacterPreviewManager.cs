@@ -117,58 +117,53 @@ public class CharacterPreviewManager : MonoBehaviour {
 			// --------------------------------------------------------------------------
 			// RENDER TEXTURE
 			// --------------------------------------------------------------------------
+
 			RenderTexture rt = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
 			rt.Create();
 			rt.name = "RenderTexture" + i;
-			// --------------------------------------------------------------------------
 
 			// --------------------------------------------------------------------------
-			// SET SPAWN FOR MODEL PREVIEW MODELS/CAMERAS
+			// CREATE SPAWN FOR MODEL PREVIEW MODELS/CAMERAS
 			// --------------------------------------------------------------------------
+
 			float spawnOffset = -i + (-i + -5f); // spawn offset down and extra spacing
-			Vector3 spawnPos = new Vector3(0f,spawnOffset,0f); // set the new postion
-			Vector3 cameraSpawnPos = new Vector3(0f,spawnOffset + 0.5f, -3f);
 
-			// --------------------------------------------------------------------------
-			// CREATE SPAWN POINT FOR MODELS TEXTURE
-			// --------------------------------------------------------------------------
+			Vector3 spawnPos = new Vector3(0f,spawnOffset,0f); // set the new postion
+			Vector3 cameraSpawnPos = new Vector3(2.06f,spawnOffset + 0.5f, -3f); // camera spawn postion
+
 			GameObject spawnPoint = new GameObject(); // create new empty GameObject
 			spawnPoint.transform.position = spawnPos; // set its spawn position incremented
 			spawnPoint.transform.localRotation *= Quaternion.Euler(0,180,0); // flip the spawn 180
 			spawnPoint.name = gm[i].name + "Anchor"; // give the spawn point a new name
 
 			// --------------------------------------------------------------------------
-			// INSTANTIATE PREVIEW MODELS
+			// INSTANTIATE Model/Camera
 			// --------------------------------------------------------------------------
-			GameObject go = (GameObject)Instantiate(gm[i]);
-			go.transform.SetParent(spawnPoint.transform, false);
+			GameObject go = (GameObject)Instantiate(gm[i]); // instantiate model
+			go.transform.SetParent(spawnPoint.transform, false); // set parent to spawnPoint anchor
 
-			GameObject GUI3DBtn = (GameObject)Instantiate(GUI3DButtonCamera);// Instantiate the action button prefab.
-			GUI3DBtn.transform.position = cameraSpawnPos;
-			Camera guiCam = GUI3DBtn.GetComponent<Camera>();
+			GameObject buttonCamera = (GameObject)Instantiate(GUI3DButtonCamera); // instantiate button camera
+			buttonCamera.transform.SetParent(spawnPoint.transform, false);
+			buttonCamera.transform.position = cameraSpawnPos; // set position to  camera spawn position.
+			buttonCamera.transform.localRotation *= Quaternion.Euler(0f, -215f, 0f); // set the rotation of the camera at an angle.
+			Camera guiCam = buttonCamera.GetComponent<Camera>();
 
-			Debug.Log(rt.IsCreated());
-
-			guiCam.targetTexture = rt;
-
-			Debug.Log (guiCam.targetTexture.name);
+			guiCam.targetTexture = rt; // set the camera texture to the render texture we created before
 
 			// Instantiate the action button prefab.
-			GameObject a = (GameObject)Instantiate(actorButtonPrefab);
+			GameObject actorButton = (GameObject)Instantiate(actorButtonPrefab);
+			actorButton.transform.SetParent(modelPanel.transform, false); // Set the parent for the button
+			Text txt = actorButton.GetComponentInChildren<Text>(); // get the button text component
+			txt.text = gm[i].name.Replace ("Demo", ""); // set the text to the model name and Remove the affex "Demo"
 
-			// Set the parent for the button
-			a.transform.SetParent(modelPanel.transform, false);
-
-			// Get and set the button text
-			Text txt = a.GetComponentInChildren<Text>();
-
-			// set the text to the model name and Remove the affex "Demo"
-			txt.text = gm[i].name.Replace ("Demo", "");
-
-			// set the raw image to the render texture.
-			RawImage rawImg = a.GetComponentInChildren<RawImage>();
+			// set the raw image to the render texture created before.
+			RawImage rawImg = actorButton.GetComponentInChildren<RawImage>();
 			rawImg.texture = rt;
 
+			// TODO: add the on click event to switch between models.
+			// Move the start function items to a new function that can be called
+			// when the user clicks the button. Call it LoadModel(clicked id?);
+			// pass in what array position of the modle that was clicked.
 		}
 	}
 
