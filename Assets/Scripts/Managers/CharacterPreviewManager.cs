@@ -164,6 +164,7 @@ public class CharacterPreviewManager : MonoBehaviour {
 			// Move the start function items to a new function that can be called
 			// when the user clicks the button. Call it LoadModel(clicked id?);
 			// pass in what array position of the modle that was clicked.
+			StartRotating();
 		}
 	}
 
