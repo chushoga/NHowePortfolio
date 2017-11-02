@@ -176,9 +176,16 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 
 	void OnMouseDrag(){
-		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+		/*Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 		pos = Input.mousePosition - pos;
 		float ang = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg - baseAngle;
 		transform.rotation = Quaternion.AngleAxis(ang, Vector3.up);
+*/
+		float rotationSpeed = 0.5f;
+		Vector3 mousePos = Input.mousePosition;
+		mousePos.z = Camera.main.transform.position.y - transform.position.y;
+		Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+		float angle = -Mathf.Atan2(transform.position.z - mouseWorldPos.z, transform.position.x - mouseWorldPos.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), rotationSpeed * Time.deltaTime);
 	}
 }
