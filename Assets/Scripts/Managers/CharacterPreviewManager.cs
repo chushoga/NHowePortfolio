@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterPreviewManager : MonoBehaviour {
-	// rotation speed for the character
-	public float rotSpeed = 0.0f;
+
+	// OTHER
+	public float rotSpeed = 0.0f;	// rotation speed for the character
+	public float baseAngle = 0.0f; // base angle for drag rotation
 
 	// ANIMATIONS
 	public List<GameObject> gm; // drop all the modles/with their animations in the list
@@ -98,7 +100,8 @@ public class CharacterPreviewManager : MonoBehaviour {
 			i++;
 		}
 
-		StartRotating(); // start rotating the model
+		// NOTE: Dissabled for testing click drag rotation.
+		//StartRotating(); // start rotating the model
 	}
 
 	// Populate Models Menu
@@ -161,4 +164,21 @@ public class CharacterPreviewManager : MonoBehaviour {
 		}
 	}
 
+	// Rotate the model on mouse down
+
+	void OnMouseDown(){
+		Debug.Log("MOUSE DOWN");
+		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+		pos = Input.mousePosition - pos;
+		baseAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
+		baseAngle -= Mathf.Atan2(transform.right.y, transform.right.x) * Mathf.Rad2Deg;
+	}
+
+
+	void OnMouseDrag(){
+		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+		pos = Input.mousePosition - pos;
+		float ang = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg - baseAngle;
+		transform.rotation = Quaternion.AngleAxis(ang, Vector3.up);
+	}
 }
