@@ -20,73 +20,19 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 	void Start(){
 		
-		// Find the action panel
+		// Find the action and model panel in the GUI
 		modelPanel = GameObject.Find("ModelPanelContent");
+		actionPanel = GameObject.Find("ActionPanelContent");
 
 		// Instantiate buttons for the model selection buttons
 		if (modelPanel != null) {
-			PopulateModels();
+			PopulateModelPreview();
 		}
-
-		// Instantiate the first model in the list as default and set as "model" game object
-		GameObject model = Instantiate(gm[0], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-
-		// Set the models postion to this transform.
-		//---------------------------------------------------
-		// TODO: see if this is really necessary!!!!
-		//---------------------------------------------------
-		model.transform.SetParent(gameObject.transform, false);
-		//---------------------------------------------------
-
-		// Find the action panel
-		actionPanel = GameObject.Find("ActionPanelContent");
 
 		// Check if the action panel actually exists
 		if(actionPanel != null){
-
-			// get the animator component of the model and set it to a variable
-			anim = model.GetComponent<Animator>();
-
-			//Debug.Log(anim.runtimeAnimatorController.animationClips.Length);
-
-			// loop through the clips found in the animator.
-			//---------------------------------------------------
-			// TODO: Consider changing this to a for loop
-			// try the following once the code works ok. put the 
-			// foreach conents into the for loop.
-			//---------------------------------------------------
-			/*
-			for(int i = 0; i < anim.runtimeAnimatorController.animationClips.Length; i++){
-				Debug.Log(anim.runtimeAnimatorController.animationClips[i].name);
-			}
-*/
-			//---------------------------------------------------
-			int i = 0;
-			foreach(AnimationClip ac in anim.runtimeAnimatorController.animationClips){
-
-				// Name of animation clip
-				string animationName = anim.runtimeAnimatorController.animationClips[i].name;
-
-				// Instantiate the action button prefab.
-				GameObject a = (GameObject)Instantiate(actionButtonPrefab);
-
-				// Set the parent for the button
-				a.transform.SetParent(actionPanel.transform, false);
-
-				// Get and set the button text
-				Text txt = a.GetComponentInChildren<Text>();
-				txt.text = anim.runtimeAnimatorController.animationClips[i].name;
-
-				// Add an onClick listener to the button to play the animationName.
-				a.GetComponent<Button>().onClick.AddListener(() => PlayAnimationButton(animationName));
-
-				i++;
-			}
-
-		} else {
-			Debug.Log("There is no actionPanel in the GUI for the actions.");
-		}
-
+			LoadModel(1);
+		} 
 
 	}
 
@@ -110,8 +56,53 @@ public class CharacterPreviewManager : MonoBehaviour {
 		rotSpeed = 0;
 	}
 
+	public void LoadModel(int actor){
+
+		// first clear the main spawn point before adding.
+		foreach(Transform child in transform){
+			Destroy(child.gameObject);
+		}
+		// first clear any previous actions in the action panel
+		foreach(Transform child in actionPanel.transform) {
+			Destroy(child.gameObject);
+		}
+
+		// Instantiate the first model in the list as default and set as "model" game object
+		GameObject model = Instantiate(gm[actor], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+
+		// Set the models postion to this transform.
+		model.transform.SetParent(gameObject.transform, false);
+
+		// get the animator component of the model and set it to a variable
+		anim = model.GetComponent<Animator>();
+
+		int i = 0;
+		foreach(AnimationClip ac in anim.runtimeAnimatorController.animationClips){
+
+			// Name of animation clip
+			string animationName = anim.runtimeAnimatorController.animationClips[i].name;
+
+			// Instantiate the action button prefab.
+			GameObject a = (GameObject)Instantiate(actionButtonPrefab);
+
+			// Set the parent for the button
+			a.transform.SetParent(actionPanel.transform, false);
+
+			// Get and set the button text
+			Text txt = a.GetComponentInChildren<Text>();
+			txt.text = anim.runtimeAnimatorController.animationClips[i].name;
+
+			// Add an onClick listener to the button to play the animationName.
+			a.GetComponent<Button>().onClick.AddListener(() => PlayAnimationButton(animationName));
+
+			i++;
+		}
+
+		StartRotating(); // start rotating the model
+	}
+
 	// Populate Models Menu
-	public void PopulateModels(){
+	public void PopulateModelPreview(){
 		for (int i = 0; i < gm.Count; i++) {
 
 			// --------------------------------------------------------------------------
@@ -164,7 +155,9 @@ public class CharacterPreviewManager : MonoBehaviour {
 			// Move the start function items to a new function that can be called
 			// when the user clicks the button. Call it LoadModel(clicked id?);
 			// pass in what array position of the modle that was clicked.
-			StartRotating();
+
+			int tempInt = i; // the click listener needs this temp in to work correclty. Just adding i to the load model does not work.
+			actorButton.GetComponent<Button>().onClick.AddListener(() => LoadModel(tempInt));
 		}
 	}
 
