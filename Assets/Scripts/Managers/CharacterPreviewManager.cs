@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class CharacterPreviewManager : MonoBehaviour {
 
 	// OTHER
-	public float rotSpeed = 0.0f;	// rotation speed for the character
-	public float baseAngle = 0.0f; // base angle for drag rotation
+	public float rotationSpeed = 300f;	// rotation speed for the character
+
+	private Vector3 prevPos; // for rotating character on mouse drag
+	private Vector3 newPos; // for rotating character on mouse drag
 
 	// ANIMATIONS
 	public List<GameObject> gm; // drop all the modles/with their animations in the list
@@ -40,22 +42,12 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update(){
-		transform.Rotate(Vector3.up * Time.deltaTime * rotSpeed);
+		
 	}
 
 	// Play the animation
 	void PlayAnimationButton(string animName){
 		anim.Play(animName);
-	}
-
-	// Start he model rotation
-	public void StartRotating(){
-		rotSpeed = 20.0f;
-	}
-
-	// Stop the model rotation
-	public void StopRotating(){
-		rotSpeed = 0;
 	}
 
 	public void LoadModel(int actor){
@@ -100,8 +92,6 @@ public class CharacterPreviewManager : MonoBehaviour {
 			i++;
 		}
 
-		// NOTE: Dissabled for testing click drag rotation.
-		//StartRotating(); // start rotating the model
 	}
 
 	// Populate Models Menu
@@ -164,28 +154,32 @@ public class CharacterPreviewManager : MonoBehaviour {
 		}
 	}
 
-	// Rotate the model on mouse down
 
+	// Set inital mouse touch positions
 	void OnMouseDown(){
-		Debug.Log("MOUSE DOWN");
+
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-		pos = Input.mousePosition - pos;
-		baseAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
-		baseAngle -= Mathf.Atan2(transform.right.y, transform.right.x) * Mathf.Rad2Deg;
+		pos = Input.mousePosition;
+
+		prevPos = pos;
+		newPos = pos;
+
 	}
 
-
+	// Rotate the model on mouse drag
 	void OnMouseDrag(){
+		
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-		pos = Input.mousePosition - pos;
-		float ang = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg - baseAngle;
-		transform.rotation = Quaternion.AngleAxis(ang, Vector3.up);
+		pos = Input.mousePosition;
+		newPos = pos;
 
-		float rotationSpeed = 0.5f;
-		Vector3 mousePos = Input.mousePosition;
-		mousePos.z = Camera.main.transform.position.y - transform.position.y;
-		Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
-		float angle = -Mathf.Atan2(transform.position.z - mouseWorldPos.z, transform.position.x - mouseWorldPos.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), rotationSpeed * Time.deltaTime);
+		float posDiff = (prevPos.x - newPos.x) + 1;
+
+		if(prevPos.x > newPos.x) {
+			transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+		} else if(prevPos.x < newPos.x) {
+			transform.Rotate(-Vector3.up * Time.deltaTime * rotationSpeed);
+		}
+		prevPos = newPos;
 	}
 }
