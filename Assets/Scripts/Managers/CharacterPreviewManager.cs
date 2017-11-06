@@ -173,8 +173,6 @@ public class CharacterPreviewManager : MonoBehaviour {
 		pos = Input.mousePosition;
 		newPos = pos;
 
-		float posDiff = (prevPos.x - newPos.x) + 1;
-
 		if(prevPos.x > newPos.x) {
 			transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
 		} else if(prevPos.x < newPos.x) {
