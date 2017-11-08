@@ -19,25 +19,33 @@ public class CharacterPreviewManager : MonoBehaviour {
 	public GameObject actionButtonPrefab; // the action button prefab
 	public GameObject actorButtonPrefab; // the actor button prefab
 	public GameObject GUI3DButtonCamera; // camera for 3d preveiw button
-	private GameObject actionPanel; // content panel of the scroll view
-	private GameObject modelPanel; // modle panels with scroll view
+
+	private GameObject actionPanelContent; // content panel of the scroll view
+	private GameObject modelPanelContent; // content of modle panel with scroll view
+
 	private GameObject infoPanel; // information about the model
+	private GameObject infoPanelContent; // info panel content with scroll view
 
 	void Start(){
 		
 		// Find the action and model panel in the GUI
-		modelPanel = GameObject.Find("ModelPanelContent");
-		actionPanel = GameObject.Find("ActionPanelContent");
-		infoPanel = GameObject.Find("InfoPanelContent");
+		modelPanelContent = GameObject.Find("ModelPanelContent");
+		actionPanelContent = GameObject.Find("ActionPanelContent");
+		infoPanelContent = GameObject.Find("InfoPanelContent");
+		infoPanel = GameObject.Find("InfoPanel");
 
 		// Instantiate buttons for the model selection buttons
-		if (modelPanel != null) {
+		if (modelPanelContent != null) {
 			PopulateModelPreview();
 		}
 
 		// Check if the action and panels actually exists
-		if(actionPanel != null && infoPanel != null){
+		if(actionPanelContent != null && infoPanelContent != null){
 			LoadModel(1);
+		}
+
+		if(infoPanel == null) {
+			Debug.Log("no info panel detected");
 		}
 
 	}
@@ -59,7 +67,7 @@ public class CharacterPreviewManager : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 		// first clear any previous actions in the action panel
-		foreach(Transform child in actionPanel.transform) {
+		foreach(Transform child in actionPanelContent.transform) {
 			Destroy(child.gameObject);
 		}
 
@@ -82,7 +90,7 @@ public class CharacterPreviewManager : MonoBehaviour {
 			GameObject a = (GameObject)Instantiate(actionButtonPrefab);
 
 			// Set the parent for the button
-			a.transform.SetParent(actionPanel.transform, false);
+			a.transform.SetParent(actionPanelContent.transform, false);
 
 			// Get and set the button text
 			Text txt = a.GetComponentInChildren<Text>();
@@ -95,9 +103,13 @@ public class CharacterPreviewManager : MonoBehaviour {
 		}
 
 		// Display the details info for the model
-		Text infoContent = infoPanel.GetComponentInChildren<Text>();
+		Text infoContent = infoPanelContent.GetComponentInChildren<Text>();
 		infoContent.text = ""; // first clear anything that might still be there
 		infoContent.text = model.GetComponent<ModelDetails>().details; // add the info there
+
+		// Reset the scrollbar position
+		ScrollRect sr = infoPanel.GetComponentInChildren<ScrollRect>();
+		sr.verticalNormalizedPosition = 1f;
 
 	}
 
@@ -143,7 +155,7 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 			// Instantiate the action button prefab.
 			GameObject actorButton = (GameObject)Instantiate(actorButtonPrefab);
-			actorButton.transform.SetParent(modelPanel.transform, false); // Set the parent for the button
+			actorButton.transform.SetParent(modelPanelContent.transform, false); // Set the parent for the button
 			Text txt = actorButton.GetComponentInChildren<Text>(); // get the button text component
 			txt.text = gm[i].name.Replace ("Demo", ""); // set the text to the model name and Remove the affex "Demo"
 
