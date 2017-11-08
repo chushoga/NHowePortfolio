@@ -2075,7 +2075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da8da2807ea0d747b5f7ddb6ca729a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  details: "Model Details here\nThis is a test\nTest here a gain\n\u30C6\u30B9\u30C8\n\u6F22\u5B57"
+  details: "Model Details here\nThis is a test\nTest here a gain\n\u30C6\u30B9\u30C8\n\u6F22\u5B57\nModel
+    Details here\nThis is a test\nTest here a gain\n\u30C6\u30B9\u30C8\n\u6F22\u5B57\nModel
+    Details here\nThis is a test\nTest here a gain\n\u30C6\u30B9\u30C8\n\u6F22\u5B57\nModel
+    Details here\nThis is a test\nTest here a gain\n\u30C6\u30B9\u30C8\n\u6F22\u5B57"
 --- !u!137 &137021904227526114
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

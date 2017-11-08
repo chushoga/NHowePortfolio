@@ -21,22 +21,24 @@ public class CharacterPreviewManager : MonoBehaviour {
 	public GameObject GUI3DButtonCamera; // camera for 3d preveiw button
 	private GameObject actionPanel; // content panel of the scroll view
 	private GameObject modelPanel; // modle panels with scroll view
+	private GameObject infoPanel; // information about the model
 
 	void Start(){
 		
 		// Find the action and model panel in the GUI
 		modelPanel = GameObject.Find("ModelPanelContent");
 		actionPanel = GameObject.Find("ActionPanelContent");
+		infoPanel = GameObject.Find("InfoPanelContent");
 
 		// Instantiate buttons for the model selection buttons
 		if (modelPanel != null) {
 			PopulateModelPreview();
 		}
 
-		// Check if the action panel actually exists
-		if(actionPanel != null){
+		// Check if the action and panels actually exists
+		if(actionPanel != null && infoPanel != null){
 			LoadModel(1);
-		} 
+		}
 
 	}
 
@@ -91,6 +93,11 @@ public class CharacterPreviewManager : MonoBehaviour {
 
 			i++;
 		}
+
+		// Display the details info for the model
+		Text infoContent = infoPanel.GetComponentInChildren<Text>();
+		infoContent.text = ""; // first clear anything that might still be there
+		infoContent.text = model.GetComponent<ModelDetails>().details; // add the info there
 
 	}
 

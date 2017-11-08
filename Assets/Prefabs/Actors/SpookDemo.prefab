@@ -1231,7 +1231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da8da2807ea0d747b5f7ddb6ca729a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  details: "Created on Today\nTesting for test\nNext\n\u30C6\u30B9\u30C8\n\u611F\u3058\n\u30C6\u30B9\u30C8"
+  details: "Created on Today\nTesting for test\nNext\n\u30C6\u30B9\u30C8\n\u611F\u3058\n\u30C6\u30B9\u30C8\nCreated
+    on Today\nTesting for test\nNext\n\u30C6\u30B9\u30C8\n\u611F\u3058\n\u30C6\u30B9\u30C8\nCreated
+    on Today\nTesting for test\nNext\n\u30C6\u30B9\u30C8\n\u611F\u3058\n\u30C6\u30B9\u30C8\nCreated
+    on Today\nTesting for test\nNext\n\u30C6\u30B9\u30C8\n\u611F\u3058\n\u30C6\u30B9\u30C8"
 --- !u!137 &137911862478345100
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
