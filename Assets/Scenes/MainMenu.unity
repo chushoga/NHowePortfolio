@@ -914,9 +914,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Demo
-
-'
+  m_Text: Demo
 --- !u!222 &1952025767
 CanvasRenderer:
   m_ObjectHideFlags: 0
