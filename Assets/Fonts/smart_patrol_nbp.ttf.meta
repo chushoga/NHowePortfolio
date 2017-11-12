@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: aa1c6c47d348110438325d20b2c49738
+timeCreated: 1510393168
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Smart Patrol NBP
+  fontNames:
+  - Smart Patrol NBP
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
