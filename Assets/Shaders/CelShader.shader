@@ -16,6 +16,7 @@ Shader "Custom/CelShader"
     SubShader
     {
         Tags { "RenderType"="Opaque" "LightMode"="ForwardBase" }
+
         Cull Off
         LOD 200
 
