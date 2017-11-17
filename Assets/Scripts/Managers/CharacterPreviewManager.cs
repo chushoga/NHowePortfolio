@@ -133,10 +133,10 @@ public class CharacterPreviewManager : MonoBehaviour {
 			// CREATE SPAWN FOR MODEL PREVIEW MODELS/CAMERAS
 			// --------------------------------------------------------------------------
 
-			float spawnOffset = -i + (-i + -5f); // spawn offset down and extra spacing
+			float spawnOffset = -i + (-i + -8.5f); // spawn offset down and extra spacing
 
 			Vector3 spawnPos = new Vector3(0f,spawnOffset,0f); // set the new postion
-			Vector3 cameraSpawnPos = new Vector3(2.06f,spawnOffset + 0.5f, -3f); // camera spawn postion
+
 
 			GameObject spawnPoint = new GameObject(); // create new empty GameObject
 			spawnPoint.transform.position = spawnPos; // set its spawn position incremented
@@ -149,10 +149,16 @@ public class CharacterPreviewManager : MonoBehaviour {
 			GameObject go = (GameObject)Instantiate(gm[i]); // instantiate model
 			go.transform.SetParent(spawnPoint.transform, false); // set parent to spawnPoint anchor
 
+			// get the camera offset and set to 0 if there is none.
+			float thumbnailCamOffset = 0f;
+			thumbnailCamOffset = go.GetComponent<ModelDetails>().thumbnailCameraOffset;
+
+			Vector3 cameraSpawnPos = new Vector3(2.12f, spawnOffset + 2.65f + thumbnailCamOffset, -3f); // camera spawn postion
+
 			GameObject buttonCamera = (GameObject)Instantiate(GUI3DButtonCamera); // instantiate button camera
 			buttonCamera.transform.SetParent(spawnPoint.transform, false);
 			buttonCamera.transform.position = cameraSpawnPos; // set position to  camera spawn position.
-			buttonCamera.transform.localRotation *= Quaternion.Euler(0f, -215f, 0f); // set the rotation of the camera at an angle.
+			buttonCamera.transform.localRotation *= Quaternion.Euler(30f, -215f, 0f); // set the rotation of the camera at an angle.
 			Camera guiCam = buttonCamera.GetComponent<Camera>();
 
 			guiCam.targetTexture = rt; // set the camera texture to the render texture we created before
