@@ -103,6 +103,10 @@ public class CharacterPreviewManager : MonoBehaviour {
 		}
 
 		// Display the details info for the model
+		// add the model script if it does not exist before getting dtails or it will throw error.
+		if(model.GetComponentInChildren<ModelDetails>() == null){
+			model.AddComponent<ModelDetails>();
+		}
 		Text infoContent = infoPanelContent.GetComponentInChildren<Text>();
 		infoContent.text = ""; // first clear anything that might still be there
 		infoContent.text = model.GetComponent<ModelDetails>().details; // add the info there
