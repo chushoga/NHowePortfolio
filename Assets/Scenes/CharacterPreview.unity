@@ -530,7 +530,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1093313130}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999997
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5383,7 +5383,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1608629075}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999998
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5552,7 +5552,7 @@ MonoBehaviour:
   gm:
   - {fileID: 1276543192913186, guid: 213ea20ab1ea94f44acf1865925f03e9, type: 2}
   - {fileID: 1705146035886672, guid: 4d6545d5724d96844aa3851e95b16959, type: 2}
-  - {fileID: 1117074775493280, guid: 76e05aa9610aba348b76f62f17fd16fd, type: 2}
+  - {fileID: 1727440504393238, guid: 327dbeb675e0e024b8b529a61e3e5888, type: 2}
   actionButtonPrefab: {fileID: 1741586198394690, guid: b4ef2733cce4c2e49bcf6f0fa1d1caa3,
     type: 2}
   actorButtonPrefab: {fileID: 1741586198394690, guid: 1bee395d33952a947a08eba384ab91df,
