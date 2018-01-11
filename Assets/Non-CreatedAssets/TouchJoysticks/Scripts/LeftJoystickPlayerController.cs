@@ -57,7 +57,27 @@ public class LeftJoystickPlayerController : MonoBehaviour
             float tempAngle = Mathf.Atan2(zMovementLeftJoystick, xMovementLeftJoystick);
             xMovementLeftJoystick *= Mathf.Abs(Mathf.Cos(tempAngle));
             zMovementLeftJoystick *= Mathf.Abs(Mathf.Sin(tempAngle));
+// START HERE -----------------------------------------------------------------------------------------------------------------------------
+			/*
+				Debug.Log(xMovementInput01);
 
+				if(zMovementLeftJoystick > 0) {
+					Debug.Log("FOWARD");
+				}
+
+				if(zMovementLeftJoystick < 0) {
+					Debug.Log("BACKWARD");
+				}
+
+				if(xMovementLeftJoystick > 0) {
+					Debug.Log("RIGHT");
+				}
+
+				if(xMovementLeftJoystick < 0) {
+					Debug.Log("LEFT");
+				}
+				*/
+// START HERE -----------------------------------------------------------------------------------------------------------------------------
             leftJoystickInput = new Vector3(xMovementLeftJoystick, 0, zMovementLeftJoystick);
             leftJoystickInput = transform.TransformDirection(leftJoystickInput);
             leftJoystickInput *= moveSpeed;
