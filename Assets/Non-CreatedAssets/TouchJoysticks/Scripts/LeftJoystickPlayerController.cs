@@ -5,7 +5,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
     public LeftJoystick leftJoystick; // the game object containing the LeftJoystick script
     public Transform rotationTarget; // the game object that will rotate to face the input direction
     public float moveSpeed = 6.0f; // movement speed of the player character
-    public int rotationSpeed = 8; // rotation speed of the player character
+    public float rotationSpeed = 200.0f; // rotation speed of the player character
     public Animator animator; // the animator controller of the player character
     private Vector3 leftJoystickInput; // holds the input of the Left Joystick
     private Rigidbody rigidBody; // rigid body component of the player character
@@ -57,27 +57,8 @@ public class LeftJoystickPlayerController : MonoBehaviour
             float tempAngle = Mathf.Atan2(zMovementLeftJoystick, xMovementLeftJoystick);
             xMovementLeftJoystick *= Mathf.Abs(Mathf.Cos(tempAngle));
             zMovementLeftJoystick *= Mathf.Abs(Mathf.Sin(tempAngle));
-// START HERE -----------------------------------------------------------------------------------------------------------------------------
-			/*
-				Debug.Log(xMovementInput01);
 
-				if(zMovementLeftJoystick > 0) {
-					Debug.Log("FOWARD");
-				}
-
-				if(zMovementLeftJoystick < 0) {
-					Debug.Log("BACKWARD");
-				}
-
-				if(xMovementLeftJoystick > 0) {
-					Debug.Log("RIGHT");
-				}
-
-				if(xMovementLeftJoystick < 0) {
-					Debug.Log("LEFT");
-				}
-				*/
-// START HERE -----------------------------------------------------------------------------------------------------------------------------
+			//Debug.Log(xMovementLeftJoystick + ", " + zMovementLeftJoystick);
             leftJoystickInput = new Vector3(xMovementLeftJoystick, 0, zMovementLeftJoystick);
             leftJoystickInput = transform.TransformDirection(leftJoystickInput);
             leftJoystickInput *= moveSpeed;
@@ -89,7 +70,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
             Vector3 lookDirection = temp - transform.position;
             if (lookDirection != Vector3.zero)
             {
-                rotationTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection), rotationSpeed * Time.deltaTime);
+            //    rotationTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection), rotationSpeed * Time.deltaTime);
             }
             if (animator != null)
             {
@@ -97,7 +78,37 @@ public class LeftJoystickPlayerController : MonoBehaviour
             }
 
             // move the player
-            rigidBody.transform.Translate(leftJoystickInput * Time.fixedDeltaTime);
+            //rigidBody.transform.Translate(leftJoystickInput * Time.fixedDeltaTime);
+
+
+			// START HERE -----------------------------------------------------------------------------------------------------------------------------
+
+			moveSpeed = Mathf.Abs(zMovementLeftJoystick * 10);
+			rotationSpeed = Mathf.Abs(xMovementLeftJoystick * 200);
+
+			if(zMovementLeftJoystick > 0) {
+				Debug.Log("FOWARD");
+				transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+			}
+
+			if(zMovementLeftJoystick < 0) {
+				transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+				Debug.Log("BACKWARD");
+			}
+
+			if(xMovementLeftJoystick > 0) {
+				transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+				Debug.Log("RIGHT");
+			}
+
+			if(xMovementLeftJoystick < 0) {
+				transform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
+				Debug.Log("LEFT");
+			}
+			Debug.Log(moveSpeed + " - " + rotationSpeed);
+
+			// START HERE -----------------------------------------------------------------------------------------------------------------------------
+
         }
     }
 }

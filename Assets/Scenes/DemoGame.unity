@@ -2028,7 +2028,7 @@ MonoBehaviour:
   leftJoystick: {fileID: 877942203}
   rotationTarget: {fileID: 1873483837}
   moveSpeed: 6
-  rotationSpeed: 8
+  rotationSpeed: 100
   animator: {fileID: 890782132}
 --- !u!54 &1873483839
 Rigidbody:
