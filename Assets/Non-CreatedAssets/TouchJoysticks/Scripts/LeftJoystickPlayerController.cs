@@ -4,7 +4,8 @@ public class LeftJoystickPlayerController : MonoBehaviour
 {
     public LeftJoystick leftJoystick; // the game object containing the LeftJoystick script
     public Transform rotationTarget; // the game object that will rotate to face the input direction
-    public float moveSpeed = 6.0f; // movement speed of the player character
+    private float moveSpeed = 1.0f; // movement speed of the player character
+	public float moveSpeedMultiplier = 4.0f;
     public float rotationSpeed = 200.0f; // rotation speed of the player character
     public Animator animator; // the animator controller of the player character
     private Vector3 leftJoystickInput; // holds the input of the Left Joystick
@@ -83,7 +84,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
 
 			// START HERE -----------------------------------------------------------------------------------------------------------------------------
 
-			moveSpeed = Mathf.Abs(zMovementLeftJoystick * 10);
+			moveSpeed = Mathf.Abs(zMovementLeftJoystick * moveSpeedMultiplier);
 			rotationSpeed = Mathf.Abs(xMovementLeftJoystick * 200);
 
 			if(zMovementLeftJoystick > 0) {
