@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5712e2d899409e740952341ff07fd91f
-timeCreated: 1516247627
+guid: d1b563115941e5f4ebc044b5a0c72c29
+timeCreated: 1516679941
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Tunnel.009
+    4300000: Tunnel
   materials:
     importMaterials: 1
     materialName: 0

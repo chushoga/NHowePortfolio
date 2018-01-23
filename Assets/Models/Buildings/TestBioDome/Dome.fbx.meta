@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fa478f2137f043c49b66352358c9243a
-timeCreated: 1516247624
+guid: 8a06bdae91fc579419da129d37bed631
+timeCreated: 1516679941
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Icosphere.001
+    4300000: Dome
   materials:
     importMaterials: 1
     materialName: 0
