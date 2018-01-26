@@ -3,6 +3,7 @@
 public class LeftJoystickPlayerController : MonoBehaviour
 {
     public LeftJoystick leftJoystick; // the game object containing the LeftJoystick script
+	public RightJoystick rightJoystick;
     public Transform rotationTarget; // the game object that will rotate to face the input direction
     private float moveSpeed = 1.0f; // movement speed of the player character
 	public float moveSpeedMultiplier = 4.0f;
@@ -26,6 +27,12 @@ public class LeftJoystickPlayerController : MonoBehaviour
         {
             Debug.LogError("The left joystick is not attached.");
         }
+
+		if (rightJoystick == null)
+		{
+			Debug.LogError("The left joystick is not attached.");
+		}
+
 
         if (rotationTarget == null)
         {
