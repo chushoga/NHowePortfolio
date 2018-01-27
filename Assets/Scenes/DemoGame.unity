@@ -1661,7 +1661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftJoystick: {fileID: 194640404}
   rightJoystick: {fileID: 1101263428}
-  rotationTarget: {fileID: 970960292}
+  rotationTarget: {fileID: 639222667}
+  cameraTarget: {fileID: 0}
   moveSpeedMultiplier: 10
   rotationSpeed: 200
   animator: {fileID: 234823982}
