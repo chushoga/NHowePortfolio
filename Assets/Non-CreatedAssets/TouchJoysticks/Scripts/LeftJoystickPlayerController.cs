@@ -5,7 +5,13 @@ public class LeftJoystickPlayerController : MonoBehaviour
     public LeftJoystick leftJoystick; // the game object containing the LeftJoystick script
 	public RightJoystick rightJoystick;
     public Transform rotationTarget; // the game object that will rotate to face the input direction
+
 	public Transform cameraTarget; // the camera that the player uses to look
+	private float xCameraRotationClamp = 80.0f; // clamp the rotation of the looking x angle
+	private float yCameraRotationClamp = 80.0f; // clamp the rotation of the looking y angle
+	private float cameraRotationSpeed = 1.0f;
+	private float cameraRotationResetSpeed = 2.0f; // speed of the lerp to return to Vector3.zero
+
     private float moveSpeed = 1.0f; // movement speed of the player character
 	public float moveSpeedMultiplier = 4.0f;
     public float rotationSpeed = 200.0f; // rotation speed of the player character
@@ -56,7 +62,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
         float zMovementLeftJoystick = leftJoystickInput.y; // The vertical movement from joystick 01	
 
 		float xMovementRightJoystick = rightJoystickInput.x; // The horizontal movement from joystick 01
-		float zMovementRightJoystick = rightJoystickInput.y; // The vertical movement from joystick 01	
+		float yMovementRightJoystick = rightJoystickInput.y; // The vertical movement from joystick 01	
 
         // if there is no input on the left joystick
 		if (leftJoystickInput == Vector3.zero || rightJoystickInput == Vector3.zero)
@@ -129,9 +135,41 @@ public class LeftJoystickPlayerController : MonoBehaviour
 		// if there is only input from the right joystick
 		if(rightJoystickInput != Vector3.zero) {
 
+			// calculate the player's direction based on angle
+			float tempAngle = Mathf.Atan2(yMovementRightJoystick, xMovementRightJoystick);
+			xMovementRightJoystick *= Mathf.Abs(Mathf.Cos(tempAngle));
+			yMovementRightJoystick *= Mathf.Abs(Mathf.Sin(tempAngle));
+
+			//Debug.Log(xMovementLeftJoystick + ", " + zMovementLeftJoystick);
+			//rightJoystickInput = new Vector3(xMovementRightJoystick, 0, yMovementRightJoystick);
+			//rightJoystickInput = transform.TransformDirection(rightJoystickInput);
+			//rightJoystickInput *= moveSpeed;
+
+			// rotate the player to face the direction of input
+			Vector3 temp = transform.position;
+			temp.x += xMovementRightJoystick;
+			temp.y += yMovementRightJoystick;
+			//temp.z = 0f;
+
+			//Vector3 temp2 = new Vector3(transform.position.x, transform.position.y, 0f);
+
+			Vector3 lookDirection = temp - transform.position;
+
+
+			//Debug.Log("right joystick lookDirection" + temp2);
+			//Debug.Log("right joystick" + rightJoystickInput);
+
+
 			// START HERE !!!!!!!!!!!!!!!!!! TRY PUTTING THE COMMENTED OUT LINE IN AND SEE IF IT WORKS
-			//cameraTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection), rotationSpeed * Time.deltaTime);
-			Debug.Log("right joystick" + rightJoystickInput);
+			if(temp.x < xCameraRotationClamp) {
+				Debug.Log("over Clamp!!" + temp.x);
+			}
+			//cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(lookDirection), cameraRotationSpeed * Time.deltaTime);
+			cameraTarget.transform.Rotate(temp.x, temp.y, 0);
+		} else {
+			// if the joystick is released then snap back to 0,0
+			cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
 		}
+
     }
 }

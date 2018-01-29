@@ -1662,7 +1662,7 @@ MonoBehaviour:
   leftJoystick: {fileID: 194640404}
   rightJoystick: {fileID: 1101263428}
   rotationTarget: {fileID: 639222667}
-  cameraTarget: {fileID: 0}
+  cameraTarget: {fileID: 639222667}
   moveSpeedMultiplier: 10
   rotationSpeed: 200
   animator: {fileID: 234823982}
@@ -1686,7 +1686,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 970960289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: -215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 639222667}
