@@ -10,7 +10,8 @@ public class LeftJoystickPlayerController : MonoBehaviour
 	public Transform cameraTarget; // the camera that the player uses to look
 	private float xCameraRotationClamp = 45.0f; // clamp the rotation of the looking x angle
 	private float yCameraRotationClamp = 45.0f; // clamp the rotation of the looking y angle
-	private float cameraRotationSpeed = 200.0f;
+	private float xCameraRotationSpeed = 100.0f;
+	private float yCameraRotationSpeed = 100.0f;
 	private float cameraRotationResetSpeed = 2.0f; // speed of the lerp to return to Vector3.zero
 
     private float moveSpeed = 1.0f; // movement speed of the player character
@@ -160,39 +161,44 @@ public class LeftJoystickPlayerController : MonoBehaviour
 			tempRight.y += yMovementRightJoystick;
 			tempRight.z = 0f;
 
-			Debug.Log("lookDirection:" + tempRight);
+			//Debug.Log("lookDirection:" + tempRight);
 
 			Vector3 lookDirectionRight = tempRight - cameraTarget.transform.position;
 
 			//Debug.Log("lookDirection:" + lookDirectionRight);
 
-
-			cameraRotationSpeed = Mathf.Abs(xMovementRightJoystick * 200);
+			xCameraRotationSpeed = Mathf.Abs(xMovementRightJoystick * 50);
+			yCameraRotationSpeed = Mathf.Abs(yMovementRightJoystick * 50);
 
 			//cameraTarget.transform.Rotate(new Vector3(0f,1f,0f) * cameraRotationSpeed * Time.deltaTime);
 
 
 			if(xMovementRightJoystick > 0) {
-				//cameraTarget.transform.Rotate(new Vector3(0f, 1f, 0f) * cameraRotationSpeed * Time.deltaTime);
+				Debug.Log("RIGHT → " + cameraTarget.transform);
+				//cameraTarget.transform.Rotate(new Vector3(0f, 1f, 0f) * xCameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(xMovementRightJoystick < 0) {
-				//cameraTarget.transform.Rotate(new Vector3(0f, -1f, 0f) * cameraRotationSpeed * Time.deltaTime);
+				Debug.Log("← LEFT" + cameraTarget.transform);
+				//cameraTarget.transform.Rotate(new Vector3(0f, -1f, 0f) * xCameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(yMovementRightJoystick > 0) {
-				parentCameraTarget.transform.Rotate(new Vector3(1f, 0f, 0f) * cameraRotationSpeed * Time.deltaTime);
+				Debug.Log("UP ↑ " + parentCameraTarget.transform);
+				parentCameraTarget.transform.Rotate(new Vector3(-1f, 0f, 0f) * yCameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(yMovementRightJoystick < 0) {
-				parentCameraTarget.transform.Rotate(new Vector3(-1f, 0f, 0f) * cameraRotationSpeed * Time.deltaTime);
+				Debug.Log("DOWN ↓ " + parentCameraTarget.transform);
+				parentCameraTarget.transform.Rotate(new Vector3(1f, 0f, 0f) * yCameraRotationSpeed * Time.deltaTime);
 			}
 
 			
 		} else {
 			// if the joystick is released then snap back to 0,0
-			parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
-
+			// UNCOMMENT TO SNAP THE CAMERA BACK TO STARTING POINT
+			//parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+			//cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
 		}
 
     }
