@@ -6,6 +6,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
 	public RightJoystick rightJoystick;
     public Transform rotationTarget; // the game object that will rotate to face the input direction
 
+	public Transform parentCameraTarget;	
 	public Transform cameraTarget; // the camera that the player uses to look
 	private float xCameraRotationClamp = 45.0f; // clamp the rotation of the looking x angle
 	private float yCameraRotationClamp = 45.0f; // clamp the rotation of the looking y angle
@@ -20,8 +21,10 @@ public class LeftJoystickPlayerController : MonoBehaviour
 	private Vector3 rightJoystickInput; // holds the input of the Right Joystick
     private Rigidbody rigidBody; // rigid body component of the player character
 
+
     void Start()
     {
+		
         if (transform.GetComponent<Rigidbody>() == null)
         {
             Debug.LogError("A RigidBody component is required on this game object.");
@@ -46,6 +49,8 @@ public class LeftJoystickPlayerController : MonoBehaviour
         {
             Debug.LogError("The target rotation game object is not attached.");
         }
+
+
     }
 
     void Update()
@@ -54,6 +59,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+		
         // get input from both joysticks
 		leftJoystickInput = leftJoystick.GetInputDirection();
 		rightJoystickInput = rightJoystick.GetInputDirection();
@@ -135,86 +141,58 @@ public class LeftJoystickPlayerController : MonoBehaviour
 
 		// if there is only input from the right joystick
 		if(rightJoystickInput != Vector3.zero) {
-
+			
 			// calculate the player's direction based on angle
 			float tempAngleRight = Mathf.Atan2(yMovementRightJoystick, xMovementRightJoystick);
 			xMovementRightJoystick *= Mathf.Abs(Mathf.Cos(tempAngleRight));
 			yMovementRightJoystick *= Mathf.Abs(Mathf.Sin(tempAngleRight));
 
-			Debug.Log(xMovementRightJoystick + ", " + yMovementRightJoystick);
-			//rightJoystickInput = new Vector3(xMovementRightJoystick, 0, yMovementRightJoystick);
-			//rightJoystickInput = transform.TransformDirection(rightJoystickInput);
-			//rightJoystickInput *= moveSpeed;
+			//Debug.Log(xMovementRightJoystick + ", " + yMovementRightJoystick);
+			rightJoystickInput = new Vector3(xMovementRightJoystick, yMovementRightJoystick, 0);
+			rightJoystickInput = parentCameraTarget.transform.TransformDirection(rightJoystickInput);
+			rightJoystickInput *= moveSpeed;
+
+			//Debug.Log("rightJoystickInput:" + rightJoystickInput);
 
 			// rotate the player to face the direction of input
 			Vector3 tempRight = cameraTarget.transform.position;
 			tempRight.x += xMovementRightJoystick;
 			tempRight.y += yMovementRightJoystick;
+			tempRight.z = 0f;
 
-		
+			Debug.Log("lookDirection:" + tempRight);
+
 			Vector3 lookDirectionRight = tempRight - cameraTarget.transform.position;
 
-			// START HERE !!!!!!!!!!!!!!!!!! TRY PUTTING THE COMMENTED OUT LINE IN AND SEE IF IT WORKS
-			//Debug.Log("CURRENT Y ROTATION: " + cameraTarget.transform.localEulerAngles.y + " | CLAMP: " + yCameraRotationClamp);
-			//Debug.Log(temp.x + ", " + temp.y);
-			Debug.Log(tempRight.x + ", " + tempRight.y + " => " + lookDirectionRight);
-
-			if(cameraTarget.transform.localRotation.eulerAngles.y >= yCameraRotationClamp) {
-				
-				//Debug.Log("over Clamp!! STOP" + cameraTarget.transform.localRotation.eulerAngles.y);
-
-			} else {
-				
-				//Debug.Log("ROTATE!" + cameraTarget.transform.localRotation.eulerAngles.y);
-
-			}
+			//Debug.Log("lookDirection:" + lookDirectionRight);
 
 
 			cameraRotationSpeed = Mathf.Abs(xMovementRightJoystick * 200);
 
+			//cameraTarget.transform.Rotate(new Vector3(0f,1f,0f) * cameraRotationSpeed * Time.deltaTime);
+
 
 			if(xMovementRightJoystick > 0) {
-				//cameraTarget.transform.Rotate(Vector3.zero * cameraRotationSpeed * Time.deltaTime);
-// CONTINUE HERE ----------------------------------------------------------------------------------------------------
-				// think about putting this in here
-				float speed = 3.0f;
-				float xRot = speed * xMovementRightJoystick;
-				float yRot = speed * yMovementRightJoystick;
-
-				cameraTarget.transform.Rotate(xRot, yRot, 0.0f);
-// CONTINUE HERE ----------------------------------------------------------------------------------------------------
-				//Debug.Log("RIGHT");
+				//cameraTarget.transform.Rotate(new Vector3(0f, 1f, 0f) * cameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(xMovementRightJoystick < 0) {
-				cameraTarget.transform.Rotate(-Vector3.up * cameraRotationSpeed * Time.deltaTime);
-				//Debug.Log("LEFT");
+				//cameraTarget.transform.Rotate(new Vector3(0f, -1f, 0f) * cameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(yMovementRightJoystick > 0) {
-				//cameraTarget.transform.Rotate(Vector3.left * cameraRotationSpeed * Time.deltaTime);
-				//Debug.Log("RIGHT");
+				parentCameraTarget.transform.Rotate(new Vector3(1f, 0f, 0f) * cameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(yMovementRightJoystick < 0) {
-				//cameraTarget.transform.Rotate(-Vector3.left * cameraRotationSpeed * Time.deltaTime);
-				//Debug.Log("LEFT");
+				parentCameraTarget.transform.Rotate(new Vector3(-1f, 0f, 0f) * cameraRotationSpeed * Time.deltaTime);
 			}
-
-			/*
-			cameraTarget.transform.eulerAngles = new Vector3(
-				cameraTarget.transform.eulerAngles.x - tempRight.y * Time.deltaTime * 100.0f,
-				cameraTarget.transform.eulerAngles.y + tempRight.x * Time.deltaTime * 100.0f,
-				0f);
-			*/
-			//cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(lookDirectionRight), cameraRotationSpeed * Time.deltaTime);
-			//cameraTarget.transform.Rotate(tempRight.x, tempRight.y, 0);
-
 
 			
 		} else {
 			// if the joystick is released then snap back to 0,0
-			cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+			parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+
 		}
 
     }

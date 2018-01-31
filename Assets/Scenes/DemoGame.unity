@@ -854,10 +854,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 639222666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 970960292}
+  m_Father: {fileID: 909408664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &639222668
@@ -1500,6 +1500,35 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &909408663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 909408664}
+  m_Layer: 0
+  m_Name: CameraParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &909408664
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 909408663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8500001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 639222667}
+  m_Father: {fileID: 970960292}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &921372632
 Prefab:
   m_ObjectHideFlags: 0
@@ -1662,6 +1691,7 @@ MonoBehaviour:
   leftJoystick: {fileID: 194640404}
   rightJoystick: {fileID: 1101263428}
   rotationTarget: {fileID: 639222667}
+  parentCameraTarget: {fileID: 909408664}
   cameraTarget: {fileID: 639222667}
   moveSpeedMultiplier: 10
   rotationSpeed: 200
@@ -1686,10 +1716,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 970960289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -215}
+  m_LocalPosition: {x: 0, y: 0.57, z: -215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 639222667}
+  - {fileID: 909408664}
   - {fileID: 234823983}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1927,7 +1957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -118.62, y: 129}
+  m_AnchoredPosition: {x: -118.62012, y: 129}
   m_SizeDelta: {x: 303.3999, y: 303.4}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &1166469597 stripped
