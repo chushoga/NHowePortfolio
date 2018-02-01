@@ -60,6 +60,10 @@ public class LeftJoystickPlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+
+		float tempClamp = parentCameraTarget.transform.localEulerAngles.x;
+
+		//Debug.Log("CURRENT ANGLE -->" + tempClamp);
 		
         // get input from both joysticks
 		leftJoystickInput = leftJoystick.GetInputDirection();
@@ -72,15 +76,16 @@ public class LeftJoystickPlayerController : MonoBehaviour
 		float yMovementRightJoystick = rightJoystickInput.y; // The vertical movement from joystick 01	
 
         // if there is no input on the left joystick
-		if (leftJoystickInput == Vector3.zero || rightJoystickInput == Vector3.zero)
-        {
+		if (leftJoystickInput == Vector3.zero || rightJoystickInput == Vector3.zero){
+			
             animator.SetBool("isRunning", false);
+			Debug.Log("test");
+
         }
 
   
         // if there is only input from the left joystick
-        if (leftJoystickInput != Vector3.zero)
-        {
+        if (leftJoystickInput != Vector3.zero) {
             // calculate the player's direction based on angle
             float tempAngle = Mathf.Atan2(zMovementLeftJoystick, xMovementLeftJoystick);
             xMovementLeftJoystick *= Mathf.Abs(Mathf.Cos(tempAngle));
@@ -96,12 +101,10 @@ public class LeftJoystickPlayerController : MonoBehaviour
             temp.x += xMovementLeftJoystick;
             temp.z += zMovementLeftJoystick;
             Vector3 lookDirection = temp - transform.position;
-            if (lookDirection != Vector3.zero)
-            {
+            if (lookDirection != Vector3.zero) {
             //    rotationTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection), rotationSpeed * Time.deltaTime);
             }
-            if (animator != null)
-            {
+            if (animator != null) {
                 animator.SetBool("isRunning", true);
             }
 
@@ -167,11 +170,41 @@ public class LeftJoystickPlayerController : MonoBehaviour
 
 			//Debug.Log("lookDirection:" + lookDirectionRight);
 
-			xCameraRotationSpeed = Mathf.Abs(xMovementRightJoystick * 50);
-			yCameraRotationSpeed = Mathf.Abs(yMovementRightJoystick * 50);
+			xCameraRotationSpeed = Mathf.Abs(xMovementRightJoystick * 200);
+			yCameraRotationSpeed = Mathf.Abs(yMovementRightJoystick * 200);
 
-			//cameraTarget.transform.Rotate(new Vector3(0f,1f,0f) * cameraRotationSpeed * Time.deltaTime);
+			float rotToPos = Mathf.Abs(yMovementRightJoystick * 360f);
+			float rotToNeg = 360f - (Mathf.Abs(yMovementRightJoystick * 360f));
 
+			Debug.Log("POS: " + rotToPos + ", NEG: " + rotToNeg);
+
+
+			float apple = Mathf.Abs(yMovementRightJoystick * 360);
+			//parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(new Vector3(0f, 1f, 0f)), Time.deltaTime * cameraRotationResetSpeed);
+
+			Debug.Log(yMovementRightJoystick + "--> " + apple);
+
+			/*
+			//GLOBAL VAR
+			bool rotDirection = true;
+			//------------------------
+
+			if(yxMovementRightJoystick > 0) {
+				rotDirection = true;	
+			}
+
+			if(yMovementRightJoystick < 0) {
+				rotDirection = false;
+			}
+
+			if(rotDirection == true){
+
+			} else {
+
+			}
+				
+
+			*/
 
 			if(xMovementRightJoystick > 0) {
 				Debug.Log("RIGHT → " + cameraTarget.transform);
@@ -184,21 +217,33 @@ public class LeftJoystickPlayerController : MonoBehaviour
 			}
 
 			if(yMovementRightJoystick > 0) {
-				Debug.Log("UP ↑ " + parentCameraTarget.transform);
-				parentCameraTarget.transform.Rotate(new Vector3(-1f, 0f, 0f) * yCameraRotationSpeed * Time.deltaTime);
+				//Debug.Log(yMovementRightJoystick + "UP ↑ " + tempClamp);
+
+				if(tempClamp > 315f || tempClamp < 45f) {
+					//parentCameraTarget.transform.Rotate(new Vector3(-1f, 0f, 0f) * yCameraRotationSpeed * Time.deltaTime);
+				} 
 			}
 
 			if(yMovementRightJoystick < 0) {
-				Debug.Log("DOWN ↓ " + parentCameraTarget.transform);
-				parentCameraTarget.transform.Rotate(new Vector3(1f, 0f, 0f) * yCameraRotationSpeed * Time.deltaTime);
+				//Debug.Log("DOWN ↓ " + tempClamp);
+				// Check if the joystick is not floored to release the y lock
+				if(yMovementRightJoystick > -0.98f){
+					if(tempClamp > 315f || tempClamp < 45f) {
+						//parentCameraTarget.transform.Rotate(new Vector3(1f, 0f, 0f) * yCameraRotationSpeed * Time.deltaTime);
+					}
+				} 
 			}
 
 			
-		} else {
+		} else if(leftJoystickInput != Vector3.zero && rightJoystickInput == Vector3.zero) {
 			// if the joystick is released then snap back to 0,0
 			// UNCOMMENT TO SNAP THE CAMERA BACK TO STARTING POINT
-			//parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+			parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
 			//cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+		} else {
+			
+			parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+		
 		}
 
     }
