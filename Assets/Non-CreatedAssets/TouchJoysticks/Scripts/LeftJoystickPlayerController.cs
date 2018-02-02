@@ -23,6 +23,11 @@ public class LeftJoystickPlayerController : MonoBehaviour
     private Rigidbody rigidBody; // rigid body component of the player character
 
 
+	float apple;
+
+	Quaternion center;
+	float maxAngle = 45.0f;
+
     void Start()
     {
 		
@@ -51,6 +56,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
             Debug.LogError("The target rotation game object is not attached.");
         }
 
+		this.center = parentCameraTarget.rotation;
 
     }
 
@@ -79,7 +85,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
 		if (leftJoystickInput == Vector3.zero || rightJoystickInput == Vector3.zero){
 			
             animator.SetBool("isRunning", false);
-			Debug.Log("test");
+			//Debug.Log("test");
 
         }
 
@@ -176,13 +182,24 @@ public class LeftJoystickPlayerController : MonoBehaviour
 			float rotToPos = Mathf.Abs(yMovementRightJoystick * 360f);
 			float rotToNeg = 360f - (Mathf.Abs(yMovementRightJoystick * 360f));
 
-			Debug.Log("POS: " + rotToPos + ", NEG: " + rotToNeg);
+			//Debug.Log("POS: " + rotToPos + ", NEG: " + rotToNeg);
 
 
-			float apple = Mathf.Abs(yMovementRightJoystick * 360);
+			//apple += yMovementRightJoystick * yCameraRotationSpeed * Time.deltaTime;
+			//parentCameraTarget.localRotation = Quaternion.Euler(-apple, 0f, 0f);	
+			Debug.Log(Input.GetAxis("Mouse Y"));
+			float rotationYInput = yMovementRightJoystick * 500f * Time.deltaTime;
+			Quaternion yQuaternion = Quaternion.AngleAxis(rotationYInput, -Vector3.right);
+			Quaternion temp = parentCameraTarget.localRotation * yQuaternion;
+			if(Quaternion.Angle(center, temp)<this.maxAngle) parentCameraTarget.localRotation = temp;
+
+
 			//parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(new Vector3(0f, 1f, 0f)), Time.deltaTime * cameraRotationResetSpeed);
-
-			Debug.Log(yMovementRightJoystick + "--> " + apple);
+			//Quaternion rot = parentCameraTarget.transform.localRotation;
+			//rot.eulerAngles = new Vector3 (apple, 0f, 0f);
+			//parentCameraTarget.transform.localRotation = rot;
+			//parentCameraTarget.transform.localEulerAngles = Quaternion.Euler(0f,apple,0f);
+			//Debug.Log(yMovementRightJoystick + "--> " + apple);
 
 			/*
 			//GLOBAL VAR
@@ -207,12 +224,12 @@ public class LeftJoystickPlayerController : MonoBehaviour
 			*/
 
 			if(xMovementRightJoystick > 0) {
-				Debug.Log("RIGHT → " + cameraTarget.transform);
+				//Debug.Log("RIGHT → " + cameraTarget.transform);
 				//cameraTarget.transform.Rotate(new Vector3(0f, 1f, 0f) * xCameraRotationSpeed * Time.deltaTime);
 			}
 
 			if(xMovementRightJoystick < 0) {
-				Debug.Log("← LEFT" + cameraTarget.transform);
+				//Debug.Log("← LEFT" + cameraTarget.transform);
 				//cameraTarget.transform.Rotate(new Vector3(0f, -1f, 0f) * xCameraRotationSpeed * Time.deltaTime);
 			}
 
