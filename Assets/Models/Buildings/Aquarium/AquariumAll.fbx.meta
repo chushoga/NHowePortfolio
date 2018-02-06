@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b74d068d052e602409074ce22ded03c8
-timeCreated: 1517804310
+guid: c1d2c770aa44bcd44adff079dbcaa7c8
+timeCreated: 1517888600
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -13,18 +13,18 @@ ModelImporter:
     400002: AquariumBody
     400004: AquariumFloor
     400006: AquariumGlass
-    2100000: AquariumGlass
-    2100002: AquariumFloor
-    2100004: AquariumBody
+    2100000: AquariumBody
+    2100002: AquariumGlass
+    2100004: AquariumFloor
     2300000: AquariumBody
     2300002: AquariumFloor
     2300004: AquariumGlass
     3300000: AquariumBody
     3300002: AquariumFloor
     3300004: AquariumGlass
-    4300000: AquariumGlass
-    4300002: AquariumFloor
-    4300004: AquariumBody
+    4300000: AquariumBody
+    4300002: AquariumGlass
+    4300004: AquariumFloor
   externalObjects: {}
   materials:
     importMaterials: 1

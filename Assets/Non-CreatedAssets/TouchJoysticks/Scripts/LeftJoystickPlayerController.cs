@@ -259,7 +259,7 @@ public class LeftJoystickPlayerController : MonoBehaviour
 			//cameraTarget.localRotation = Quaternion.Slerp(cameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
 		} else {
 			
-			parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
+			//parentCameraTarget.localRotation = Quaternion.Slerp(parentCameraTarget.localRotation, Quaternion.LookRotation(Vector3.zero), Time.deltaTime * cameraRotationResetSpeed);
 		
 		}
 
