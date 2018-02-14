@@ -923,6 +923,58 @@ Prefab:
       propertyPath: m_Name
       value: JoystickCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 114511561520469134, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b0b0ef696ad651c45bd295aa486b31e4,
+        type: 3}
+    - target: {fileID: 114970616345044070, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 30297dee1b553204a8a37f25ff7895a2,
+        type: 3}
+    - target: {fileID: 114511561520469134, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114511561520469134, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114511561520469134, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114511561520469134, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224275739529057790, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 190.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224275739529057790, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 190.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224275739529057790, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224275739529057790, guid: 01359120c3b78b8469d47ca450747274,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01359120c3b78b8469d47ca450747274, type: 2}
   m_IsPrefabParent: 0
@@ -2196,7 +2248,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 30297dee1b553204a8a37f25ff7895a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2414,14 +2466,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b0b0ef696ad651c45bd295aa486b31e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
