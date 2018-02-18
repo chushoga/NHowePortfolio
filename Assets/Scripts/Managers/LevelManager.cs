@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour {
 	private Transform coverImageGO; // the black overlay image
 	private Image coverImage; // the black overlay image
 
+	void Awake(){
+		Application.targetFrameRate = 60;
+	}
+
 	void Start(){
 		canvas = GetComponentInChildren<Canvas>();
 		coverImageGO = canvas.transform.Find("Image");
